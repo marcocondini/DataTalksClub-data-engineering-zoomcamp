@@ -5,6 +5,7 @@
 
 from sqlalchemy import create_engine
 import pandas as pd
+import click
 from tqdm.auto import tqdm
 
 
@@ -33,18 +34,17 @@ parse_dates = [
 ]
 
 
-def run():
-    year =2021
-    months = 1
-    pg_user = 'root'
-    pg_pass = 'root'
-    pg_host = 'localhost'
-    pg_port = 8888
-    pg_db = 'ny_taxi'
-
-    chunksize =100000
-
-    target_table = 'yellow_taxi_data'
+@click.command()
+@click.option('--pg-user', default='root', help='PostgreSQL user')
+@click.option('--pg-pass', default='root', help='PostgreSQL password')
+@click.option('--pg-host', default='localhost', help='PostgreSQL host')
+@click.option('--pg-port', default=5432, type=int, help='PostgreSQL port')
+@click.option('--pg-db', default='ny_taxi', help='PostgreSQL database name')
+@click.option('--target-table', default='yellow_taxi_data', help='Target table name')
+@click.option('--chunksize', default=100000, type=int, help='Chunk size for data ingestion')
+@click.option('--year', default=2021, type=int, help='Year for data ingestion')
+@click.option('--months', default=1, type=int, help='Months for data ingestion')
+def run(pg_user, pg_pass, pg_host, pg_port, pg_db, target_table, chunksize, year, months):
 
     prefix = 'https://github.com/DataTalksClub/nyc-tlc-data/releases/download/yellow/'
 

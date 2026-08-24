@@ -11,7 +11,7 @@ COPY pyproject.toml .python-version uv.lock ./
 RUN uv sync --locked --no-install-project
 
 # Copy your application code
-COPY pipeline.py .
+COPY ingest_data.py .
 
 # Run script using the uv virtual environment's python
-ENTRYPOINT ["uv", "run", "--no-sync", "python", "pipeline.py"]
+ENTRYPOINT ["uv", "run", "--no-sync", "python", "ingest_data.py"]

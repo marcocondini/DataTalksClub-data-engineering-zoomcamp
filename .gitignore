@@ -1,7 +1,11 @@
+*.parquet
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
 *$py.class
+
+
+pipeline/ny_taxi_postgres_data/
 
 # C extensions
 *.so
